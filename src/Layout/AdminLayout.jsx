@@ -2,10 +2,13 @@ import { FolderPlus, Menu, Table } from 'lucide-react'
 import React from 'react'
 import { Outlet } from 'react-router'
 import { Link } from 'react-router-dom'
+import { useLocation } from "react-router-dom";
 import Img1 from "../assets/img/Group 152.png"
 
 
 function AdminLayout() {
+    const location = useLocation();
+  
   return (
     <div className='flex h-screen'>
         <div className="w-[300px] h-[1500px] bg-teal-950 pt-20 flex flex-col items-center ">
@@ -17,9 +20,9 @@ function AdminLayout() {
               </span>
               </span></Link>
                 <div className="flex flex-col gap-7">
-                              <Link to="/admin"><span  className="flex ml-7 gap-3 items-center  cursor-pointer text-white text-2xl active:text-red-500 " ><Menu className='stroke-white'/> Главная</span></Link>
-                              <Link to="/table"><span  className="flex ml-7 gap-3 items-center cursor-pointer text-white text-2xl active:text-red-500 " ><Table className='stroke-white'/> Таблица прдуктов</span></Link>
-                              <Link to={"/post"}><button className=' flex ml-7 items-center gap-2 w-[300px] cursor-pointer text-white text-2xl active:text-red-500 '><FolderPlus className=' stroke-white '/>Добавить продукт</button></Link>
+                              <Link to={"/admin"}><span  className="flex ml-7 gap-3 items-center  cursor-pointer text-white text-2xl active:text-red-500 " ><Menu className={`${location.pathname === "/admin" ? "stroke-blue-300" : "stroke-white"}`}/> Главная</span></Link>
+                              <Link to={"/table"}><span  className="flex ml-7 gap-3 items-center cursor-pointer text-white text-2xl active:text-red-500 " ><Table className={`${location.pathname === "/table" ? "stroke-blue-300" : "stroke-white"}`}/> Таблица прдуктов</span></Link>
+                              <Link to={"/post"}><button className=' flex ml-7 items-center gap-2 w-[300px] cursor-pointer text-white text-2xl active:text-red-500 '><FolderPlus className={`${location.pathname === "/post" ? "stroke-blue-300" : "stroke-white"}`} />Добавить продукт</button></Link>
                 </div>
               </div>
         <Outlet />

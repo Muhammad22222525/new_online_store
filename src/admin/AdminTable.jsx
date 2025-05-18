@@ -4,21 +4,25 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Search from '../components/Search'
 import Pagination from '../components/Pagination';
+import useProductsFilter from '../hooks/useProductsFilter';
 function AdminTable() {
   const [data, setData] = useState([]);
+  const { page } = useProductsFilter();
+  const [pagData, setPagData] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api");
+        const response = await axios.get(`http://localhost:8000/api?page=${page}` );
         setData(response.data.data);
+        setPagData(response.data.pagination);
       } catch (error) {
         console.error("Error fetching:", error);
       }
     };
 
     fetchProducts();
-  }, []);
+  }, [page]);
   
   
   function disc(item) {
@@ -71,8 +75,10 @@ function AdminTable() {
             </tr>
           ))}
         </tbody>
-        <Pagination {...data}/>
       </table>
+        <div className=" mx-auto mt-10">
+          <Pagination {...pagData}/>
+        </div>
     </div>
   );
 }

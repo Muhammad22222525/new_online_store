@@ -113,18 +113,18 @@ function SearchInput() {
       <input
         type="text"
         placeholder="Что ищем?.."
-        className="w-[1140px] border rounded border-gray-400 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="w-screen border rounded border-gray-400 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
         value={search}
         onInput={(e) => setSearchParams({ search: e.target.value })}
       />
 
       {data.length > 0 && (
-        <div className="mt-2  flex justify-between w-[1140px]  absolute z-10  bg-[#ffffff]">
+        <div className="mt-2  flex justify flex-wrap w-[1140px]  absolute z-10  bg-[#ffffff]">
           {data.map((item) => (
-            <div key={item.id} className="border  border-gray-300  p-3 bg-white shadow hover:shadow-md transition">
+            <div key={item.id} className="border w-[285px]  border-gray-300  p-3 bg-white shadow hover:shadow-md transition">
               <Link to={`/product/${item.id}`} className="block">
                 <h3 className="font-semibold text-gray-800">{item.name}</h3>
-                <p className="text-sm text-gray-500">{item.description}</p>
+                <p className="text-sm text-gray-500 truncate">{item.description}</p>
               </Link>
             </div>
           ))}

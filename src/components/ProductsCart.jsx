@@ -61,8 +61,9 @@ function ProductsCart({ item }) {
             sell
           </span>
         )}
-
+            <Link to={`${item.image}`} target='blank'>
         <img src={item.image} alt={item.name} className="w-[203px] h-[203px]" />
+        </Link>
       </div>
       <Link to={`/product/${item.id}`}>
         <h3 className="text-[#9C9C9C] ml-8 text-lg font-medium mt-5 underline underline-offset-4">{item.name}</h3>

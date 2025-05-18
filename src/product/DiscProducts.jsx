@@ -4,8 +4,13 @@ import ProductsCart from '../components/ProductsCart';
 import axios from 'axios';
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
+import { Link } from 'react-router-dom';
+import { Eye, EyeOff } from 'lucide-react';
+
 
 function DiscProducts() {
+    const [hidden, setHidden] = useState(false)
+  
   const autoplayOptions = {
         delay: 3600, 
         stopOnInteraction: false, 
@@ -29,11 +34,14 @@ function DiscProducts() {
 
   return (
     <div>
-      <H2>Товари по акции</H2>
+      <div className=" flex justify-between items-center">
+      <Link to="/catalog/true " ><H2>Товари по акции</H2></Link>
+        <button className='h-[50px] px-6 rounded-lg bg-blue-400' onClick={() =>setHidden(!hidden)}>{hidden ? <Eye className="stroke-gray-300"/> : <EyeOff className="stroke-gray-300"/>}</button>
+      </div>
        <div className="embla" ref={emblaRef} >
          <div className="embla__container flex gap-8">
           {data.map((item, index) => (
-            <div className="embla_slide">
+            <div className={`embla__slide min-w-[300px] ${hidden ? "inline-block" : "hidden"}`}>
             <ProductsCart key={index} item={item} />
             </div>
                     ))}

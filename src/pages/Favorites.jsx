@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import H2 from "../Typography/H2"
+import H3 from '../Typography/H3';
 
 function Favorites() {
   const [addedItems, setAddedItems] = useState([]);
@@ -14,18 +15,19 @@ function Favorites() {
     localStorage.setItem("favoriteCart", JSON.stringify(updatedItems));
     setAddedItems(updatedItems); 
   };  
+   const total = addedItems.reduce((acc, value) => acc + value.price, 0);
   
   return (
     <div className='pt-10 '>
       <div className="w-[1000px] mx-auto">
-      <H2>Favorites products</H2>
       </div>
       {addedItems.length === 0 ? (
-        <div className="mx-auto w-[250px] pt-10">
-        <H2 className=' mx-auto' >No favorites.</H2>
+        <div className="mx-auto w-[350px] pt-10">
+        <H2 className=' mx-auto' >Избранных нет.</H2>
           </div> 
       ) : (
         <ul className="mx-auto space-y-4 max-w-[1000px] ">
+          <H2>Избранные продукты</H2>
           {addedItems.map((item) => (
             <li
               key={item.id}
@@ -46,6 +48,7 @@ function Favorites() {
               </div>
             </li>
           ))}
+      <H3>{`Общая цена: ${total}`}</H3>
         </ul>
       )}
     </div>

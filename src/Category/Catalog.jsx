@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import H3 from "../Typography/H3"
 import { useEffect } from 'react';
 import axios from 'axios';
-import {  ShoppingCart } from 'lucide-react'
-import { Link } from 'react-router-dom'
+// import {  ShoppingCart } from 'lucide-react'
+// import { Link } from 'react-router-dom'
 import ProductsCart from '../components/ProductsCart';
 import H2 from "../Typography/H2"
 import useProductsFilter from '../hooks/useProductsFilter';
@@ -17,22 +17,31 @@ function Catalog() {
  const [data, setData] = useState([])
  const [pagData, setPagData] = useState([])
 
- const [hasDiscount, setHasDiscount] = useState(false);
 
-  const { page, discount,  from, to, setFilters } = useProductsFilter();
+  const { page,   from, to, setFilters } = useProductsFilter();
   
   const [category, setCategory] = useState("meat");
-
-  
-  
-  
-
-
+  const [discount, setDiscount] = useState(false);
 
   useEffect(() => {
         const fetchProducts = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/api/?page=${page}&category=${category}&discount=${discount}&from=${from}&to=${to}`);  
+        setData(response.data.data);
+      } catch (error) {
+        console.error("Error fetching:", error);
+      }
+    };
+
+    fetchProducts();
+    
+  }, [page, category, from, to, discount]);
+
+
+     useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/api?page=${page}` );
         setData(response.data.data);
         setPagData(response.data.pagination);
       } catch (error) {
@@ -41,9 +50,9 @@ function Catalog() {
     };
 
     fetchProducts();
-    
-  }, [page, category, from, to]);
+  }, [page]);
 
+  
   return (
     <>
     <div className="max-w-[1140px] mx-auto">
@@ -94,7 +103,7 @@ function Catalog() {
                     type="checkbox"
                     className="w-[20px] h-[20px] rounded-[3px]"
                     checked={discount}
-                    onChange={(e) => setFilters({ discount: e.target.checked})}
+                    onChange={(e) => setDiscount(e.target.checked)}
                   />
                  Скидки
                </label>       

@@ -4,6 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import H4 from "../Typography/H4";
+import { useNavigate } from 'react-router';
 
 const schema = z.object({
   name: z.string().min(2, "Имя обязательно").max(50, "Максимум 50 символов"),
@@ -17,6 +18,7 @@ const schema = z.object({
 });
 
 function FormPost() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -29,8 +31,9 @@ function FormPost() {
   async function onSubmit(data) {
     try {
       const response = await axios.post('http://localhost:8000/api', data);
-      console.log("Созай:", response.data);
+      console.log("Созай:", response.data );
       reset(); 
+      navigate("/")
     } catch (error) {
       console.error("Хато:", error);
     }

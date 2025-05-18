@@ -2,7 +2,6 @@ import React from 'react'
 import Layout from './Layout/Layout'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
-
 import Cart from './components/Cart'
 import Catalog from './Category/Catalog'
 import AdminLayout from './Layout/AdminLayout'
@@ -22,7 +21,8 @@ function App() {
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/basket" element={<Basket />} />
         <Route path="/favorites" element={<Favorites />} />
-        <Route path="/catalog/:slug" element={<ProductCategory />} />
+        <Route path="/catalog/:slug" element={<ProductCategory />} /> 
+        <Route path="/catalog/:sluk" element={<ProductCategory />} /> 
 
       </Route>
       

@@ -13,7 +13,7 @@ function Corusel() {
    const [emblaRef] = useEmblaCarousel({ loop: false }, [Autoplay(autoplayOptions)])
   return (
     <div className='relative embla -mt-5 ' ref={emblaRef}>
-       <div className='relative w-full h-[500px] embla__container'>
+       <div className='relative w-full lg:h-[500px] md:h-[400px] embla__container'>
          <div className="embla_slide">
              <img src={Img2} alt="logo45" className='w-full h-full object-cover' />
           <div className="absolute z-20 top-[82px] left-[100px] w-[325px] h-[346px]">
